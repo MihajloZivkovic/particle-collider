@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Collider Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="main" class="wrapper">
+        <img src="pictures/Particle-Collision-Physics-Art.jpg" alt="image-bg" id="background">
+        <div class="projectName"><i>Particle Collider</i></div>
+        <div class="projectBy">Project by: Mihajlo Zivkovic</div>
+        <div class="navButtons">
+            <div class="button one"><a href="#aboutProject">About Project</a></div>
+            <div class="button two"><a href="#smasher">Start Experimenting!</a></div>
+            <div class="button three"><a href="#aboutMe">About Me</a></div>
+        </div>
+    </div>
+    <div id="aboutProject" class="wrapper">
+        <header>ABOUT PROJECT</header>
+        <div class="content">
+            <span class="text">
+                <h4>12.10.2024: start of project;</h4>
+                <p>The basic idea is to build a simulation of what happens with a few basic nucleus collisons. The user should select the target and the projectile with given interface, and there should be an animation with those particles coliding. After the collision, there should be a picture with all the products of it as well as a summary explaining what happened.
+                Optional: On every important word or name of particle(when reading the summary), refer to a wikipedia page or a quick explanation of the properties, mass, spin, etc...</p>
+                <h4>22.10.2024: update;</h4>
+                <p>So most of the visual work is finished, the particle selection is working as intended and its detected when not both(or none) of the particles are selected. One major roadblock i ran into was picking which particles to collide, firstly i wanted to simulate a high-energy collision, but it was very difficult for me to find/understand the data of them, so i will resort to low energy well known collisions. The goal with this project was for it to be a *very* primitive interactive type sandbox simulation, so i will have 4 types of particles(proton electron and their antiparticles) per side.</p>
+                <h4>29.10.2024: update;</h4>
+                <p>The particle collider demo is finished, i am pretty happy how it turned out, but most importantly im proud of myself for having enough will power to finish the project.</p>
+            </span>
+            <span class="picture">
+                <img src="pictures/preCollisionConcept.png" alt="">
+            </span>
+
+        </div>
+        <div class="navButtons noMargin">
+            <div class="button two"><a href="#smasher">Start Experimenting!</a></div>
+            <div class="button three"><a href="#aboutMe">About Me</a></div>
+        </div>
+    </div>
+    <div id="smasher" class="wrapper">
+        <div class="space">
+            <div class="particleContainer left">
+                <p>Select:</p>
+                <button class="proton" title="proton" onclick="addProtonLeft()">
+                    <div class="circle">
+                        P+
+                    </div>
+                </button>
+                <button class="electron" title="electron" onclick="addElectronLeft()">
+                    <div class="circle">
+                        e-
+                    </div>
+                <button class="antiProton" title="antiproton" onclick="addAntiProtonLeft()">
+                    <div class="circle overline">
+                        P
+                    </div>
+                </button>
+                    <button class="positron" title="positron" onclick="addPositronLeft()">
+                        <div class="circle">
+                            e+
+                        </div>
+                </button>
+            </div>
+            <div id="collidingStatus">
+                (STATUS)
+            </div>
+            <div id="particleLeft">
+                <div class="circle" id="particleLeftText">
+                </div>
+            </div>
+            <div id="particleRight">
+                <div class="circle" id="particleRightText">
+                </div>
+            </div>
+            <div class="smasherButtons">
+                <button class="collide" onclick="collide()">
+                    COLLIDE
+                </button>
+                <button class="reset" onclick="resetParticles()">
+                    RESET PARTICLES
+                </button>
+            </div>
+            <div class="particleContainer right">
+                <p>Select:</p>
+                <button class="proton" title="proton" onclick="addProtonRight()">
+                    <div class="circle">
+                        P+
+                    </div>
+                </button>
+                <button class="electron" title="electron" onclick="addElectronRight()">
+                    <div class="circle">
+                        e-
+                    </div>
+                <button class="antiProton" title="antiproton" onclick="addAntiProtonRight()">
+                    <div class="circle overline">
+                        P
+                    </div>
+                </button>
+                <button class="positron" title="positron" onclick="addPositronRight()">
+                    <div class="circle">
+                        e+
+                    </div>
+                </button>
+            </div>
+            <img id="explosion" src="pictures/smallExplosion.png" />
+            <div id="photonOne" title="photon">γ</div>
+            <div id="photonTwo" title="photon">γ</div>
+            <div id="wPlus">W<sup>+</sup></div>
+            <div id="wMinus">W<sup>-</sup></div>
+            <div id="neutron" title="neutron">N</div>
+            <div id="neutrino" title="neutrino">νe</div>
+            <div class="info">
+                <img id="electronProton" src="pictures/electronProton.png">
+                <img id="protonProton" src="pictures/protonProton.png">
+                <img id="protonAntiProton" src="pictures/protonAntiProton.png">
+                <img id="electronElectron" src="pictures/electronElectron.png">
+                <img id="positronPositron" src="pictures/positronPositron.png">
+                <img id="antiProtonAntiProton" src="pictures/antiProtonAntiProton.png">
+                <img id="protonPositron" src="pictures/protonPositron.png">
+                <img id="electronPositron" src="pictures/electronPositron.png">
+                <img id="electronAntiProton" src="pictures/electronAntiProton.png">
+                <img id="positronAntiProton" src="pictures/positronAntiProton.png">
+            </div>
+        </div>
+        <div class="navButtons smasher">
+            <div class="button one aboutP"><a href="#aboutProject">About Project</a></div>
+            <div class="button three aboutM"><a href="#aboutMe">About Me</a></div>
+        </div>
+    </div>
+        <div id="aboutMe" class="wrapper">
+            <header>ABOUT ME</header>
+            <div class="content">
+                <span class="picture">
+                    <img src="pictures/mypic.jpg" alt="">
+                </span>
+                <span class="text scrollbarLeft">
+                    <h4>Background:</h4>
+                    <p>Hi, my name is Mihajlo and I am a student of the Faculty of Electronic Engineering in Nis, Serbia.<br>Born and raised in Leskovac, a smaller city close to Nis, where I studied at a gymnasium called "Leskovacka Gimnazija".<br>I am fluent in Serbian and English while knowing a decent amount of German(B2 level).<br>I was also swimming professionaly for about 8 years and have competed/won in a large amount of national and international meets.<br>Proficient in html, css, javascript, C and C++.</p>
+                    <h4>Hobbies and interests:</h4>
+                    <p>In my spare time aside from studying, i love playing Chess, reading books, making projects, and learning about the very building blocks of our Universe.<br> Ever since I got access to the internet, I would always spend a lot of my time watching videos of people explaining very difficult concepts of quantum mechanics, of course not understanding a single thing, but being very curious regardless. The older I got and the more I studied physics, these concepts were that much more intriguing but never completely clear and always leaving me wanting to know more.</p>
+                    <h4>personal life:</h4>
+                    <p>I am very fortunate to have a familly that supports me in every way and allows me chose the path I want to take with my life. My girlfriend and all of the Friends I have, motivate me to be the best person I can be. Also "Zucka", my dog, is my undisputed #1 fan.</p>
+                </span>
+            </div>
+            <div class="navButtons noMargin">
+                <div class="button one"><a href="#aboutProject">About Project</a></div>
+                <div class="button two"><a href="#smasher">Start Experimenting!</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
