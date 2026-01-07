@@ -122,6 +122,8 @@ function annihilationResult(){
 
 function addElectronLeft()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleLeft = document.getElementById("particleLeft");
     removeParticleLeft();
     particleLeft.classList.add("electron");
@@ -131,6 +133,8 @@ function addElectronLeft()
 
 function addProtonLeft()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleLeft = document.getElementById("particleLeft");
     removeParticleLeft();
     particleLeft.classList.add("proton");
@@ -140,6 +144,8 @@ function addProtonLeft()
 
 function addAntiProtonLeft()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleLeft = document.getElementById("particleLeft");
     removeParticleLeft();
     particleLeft.classList.add("antiProton");
@@ -150,6 +156,8 @@ function addAntiProtonLeft()
 
 function addPositronLeft()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleLeft = document.getElementById("particleLeft");
     removeParticleLeft();
     particleLeft.classList.add("positron");
@@ -161,15 +169,19 @@ function addPositronLeft()
 
 function addElectronRight()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleRight = document.getElementById("particleRight");
     removeParticleRight();
     particleRight.classList.add("electron");
     document.getElementById("particleRightText").innerText = "e-";
-    selectedParticleRight = "electron"
+    selectedParticleRight = "electron";
 }
 
 function addProtonRight()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleRight = document.getElementById("particleRight");
     removeParticleRight();
     particleRight.classList.add("proton");
@@ -179,6 +191,8 @@ function addProtonRight()
 
 function addAntiProtonRight()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleRight = document.getElementById("particleRight");
     removeParticleRight();
     particleRight.classList.add("antiProton");
@@ -189,6 +203,8 @@ function addAntiProtonRight()
 
 function addPositronRight()
 {
+    if(deflection || combination || annihilation)
+        return;
     var particleRight = document.getElementById("particleRight");
     removeParticleRight();
     particleRight.classList.add("positron");
@@ -197,68 +213,84 @@ function addPositronRight()
 }
 
 function removeParticleLeft(){
-    particleLeft.classList.remove("antiProton");
-    particleLeft.classList.remove("proton");
-    particleLeft.classList.remove("positron");
-    particleLeft.classList.remove("electron");
-    particleLeft.classList.remove("overline");
+    document.getElementById("particleLeft").className = "";
 }
 
 function removeParticleRight(){
-    particleRight.classList.remove("antiProton");
-    particleRight.classList.remove("proton");
-    particleRight.classList.remove("positron");
-    particleRight.classList.remove("electron");
-    particleRight.classList.remove("overline");
+    document.getElementById("particleRight").className = "";
+}
+
+function removePicture(){
+        var infoDiv = document.querySelector(".info");
+    if (infoDiv) {
+        var children = infoDiv.children;
+        for (var i = 0; i < children.length; i++) {
+            children[i].className = "";
+        }
+    }
+}
+
+function removeProducts(){
+        var products = document.getElementById("products");
+    if (products) {
+        var children = products.children;
+        for (var i = 0; i < children.length; i++) {
+            children[i].className = "";
+        }
+    }
 }
 
 function checkParticles(){
+    
+    deflection = false;
+    combination = false;
+    annihilation = false;
+    
     //checking left side
-    if(selectedParticleLeft == "electron"){
-        selectedParticleLeftCharge = "-1";
-        antimatterLeft = false;
+    switch(selectedParticleLeft){
+        case "electron":
+            selectedParticleLeftCharge = "-1";
+            antimatterLeft = false;
+            break;
+        case "antiProton":
+            selectedParticleLeftCharge = "-1";
+            antimatterLeft = true;
+            break;
+        case "proton":
+            selectedParticleLeftCharge = "+1";
+            antimatterLeft = false;
+            break;
+        case "positron":
+            selectedParticleLeftCharge = "+1";
+            antimatterLeft = true;
+            break;
     }
-    if(selectedParticleLeft == "antiProton"){
-        selectedParticleLeftCharge = "-1";
-        antimatterLeft = true;
-    }
-
-    if(selectedParticleLeft == "proton"){
-        selectedParticleLeftCharge = "+1";
-        antimatterLeft = false;
-    }
-
-    if(selectedParticleLeft == "positron"){
-        selectedParticleLeftCharge = "+1";
-        antimatterLeft = true;
-    }
-
     //checking right side
-    if(selectedParticleRight == "electron"){
-        selectedParticleRightCharge = "-1";
-        antimatterRight = false;
+    switch(selectedParticleRight){
+        case "electron":
+            selectedParticleRightCharge = "-1";
+            antimatterRight = false;
+            break;
+        case "antiProton":
+            selectedParticleRightCharge = "-1";
+            antimatterRight = true;
+            break;
+        case "proton":
+            selectedParticleRightCharge = "+1";
+            antimatterRight = false;
+            break;
+        case "positron":
+            selectedParticleRightCharge = "+1";
+            antimatterRight = true;
+            break;
     }
-    if(selectedParticleRight == "antiProton"){
-        selectedParticleRightCharge = "-1";
-        antimatterRight = true;
-    }
-
-   if(selectedParticleRight == "proton"){
-        selectedParticleRightCharge = "+1";
-        antimatterRight = false;
-    }
-
-    if(selectedParticleRight == "positron"){
-        selectedParticleRightCharge = "+1";
-        antimatterRight = true;
-    }
-
     //checking type of collision based on selected particles
 
     if(selectedParticleLeftCharge == selectedParticleRightCharge){
         deflection = true; 
     }
     if(selectedParticleLeftCharge != selectedParticleRightCharge && antimatterLeft != antimatterRight){
+
         annihilation = true;
     }
     if(selectedParticleLeftCharge != selectedParticleRightCharge && antimatterLeft == antimatterRight){
@@ -327,9 +359,15 @@ function collide(){
         document.getElementById("collidingStatus").innerText = "PLEASE SELECT BOTH PARTICLES";
         return;
     }
+    else if(deflection || combination || annihilation){
+        document.getElementById("collideButton").disabled = true;
+        document.getElementById("collidingStatus").innerText = "PLEASE RESET THE PARTICLES";
+    }
     else{
         document.getElementById("collidingStatus").innerText = "COLLIDING...";
     }
+
+
     //checks which particles are selcted
     checkParticles();
     if(annihilation){
@@ -351,6 +389,18 @@ function collide(){
 }
 
 function resetParticles(){
-    window.location.hash = '#smasher'; //page auto scrolls to collision part
-    location.reload();
+    removeParticleLeft();
+    removeParticleRight();
+    document.getElementById("particleLeftText").innerText = "Select Particle";
+    document.getElementById("particleRightText").innerText = "Select Particle";
+    selectedParticleLeft = "notSet";
+    selectedParticleRight = "notSet";
+    deflection = false;
+    combination = false;
+    annihilation = false;
+    if(document.getElementById("collideButton") != null)
+        document.getElementById("collideButton").disabled = false;
+    document.getElementById("collidingStatus").innerText = "Particles Reset. Select New Particles.";
+    removePicture();
+    removeProducts();
 }
