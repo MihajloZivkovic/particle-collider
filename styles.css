@@ -1,472 +1,1511 @@
-*{
-    scroll-behavior: smooth;
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
+:root {
+  --ink: #101322;
+  --panel: #171a2b;
+  --text: #f4f2ed;
+  --muted: #a5a8b8;
+  --violet: #9f8cff;
+  --cyan: #74e3dd;
+  --line: rgba(255, 255, 255, 0.12);
+  --mono: 'DM Mono', monospace;
+  --display: 'Space Grotesk', sans-serif;
+  --body: 'DM Sans', sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  /* scroll-padding-top: 5rem; */
+}
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+}
+.hero {
+  min-height: 680px;
+  height: 100svh;
+  max-height: 1000px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 75% 50%,
+    #30304b 0,
+    #191b2d 37%,
+    #101322 72%
+  );
+}
+.hero-art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(16, 19, 34, 0.98) 5%,
+      rgba(16, 19, 34, 0.78) 40%,
+      rgba(16, 19, 34, 0.15) 100%
+    ),
+    linear-gradient(0deg, rgba(16, 19, 34, 0.8), transparent 28%),
+    url('pictures/Particle-Collision-Physics-Art.jpg') center/cover;
+  opacity: 0.78;
+  mask-image: linear-gradient(
+    90deg,
+    #000 22%,
+    rgba(0, 0, 0, 0.86) 54%,
+    rgba(0, 0, 0, 0.58)
+  );
+}
+.top-nav {
+  height: 82px;
+  max-width: 1240px;
+  margin: auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+}
+.top-nav > div {
+  display: flex;
+  gap: 34px;
+}
+.top-nav a {
+  text-decoration: none;
+  color: #d9d8e0;
+  font-size: 13px;
+}
+.top-nav > div a:hover,
+.source-links a:hover {
+  color: var(--cyan);
+}
+.brand {
+  font-family: var(--mono);
+  font-size: 12px !important;
+  letter-spacing: 0.12em;
+}
+.brand-mark {
+  color: var(--cyan);
+  font-size: 20px;
+  vertical-align: -2px;
+  margin-right: 9px;
+}
+.hero-copy {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(110px, 17vh, 190px) 48px 0;
+}
+.eyebrow,
+.section-label,
+.picker-label,
+.stage-topline,
+.result-kicker {
+  font: 11px var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+.hero h1 {
+  font: 600 clamp(48px, 7vw, 86px)/1.02 var(--display);
+  letter-spacing: -0.055em;
+  margin: 22px 0 24px;
+  max-width: 730px;
+}
+.hero-copy > p:not(.eyebrow) {
+  max-width: 480px;
+  color: #c2c3ce;
+  font-size: 17px;
+  line-height: 1.75;
+}
+.primary-link {
+  display: inline-flex;
+  gap: 24px;
+  align-items: center;
+  background: var(--cyan);
+  color: #101822;
+  padding: 13px 18px;
+  margin-top: 20px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+.primary-link:hover {
+  transform: translateY(-2px);
+  background: #a0f5ee;
+}
+.hero-credit {
+  position: absolute;
+  bottom: 20px;
+  right: max(48px, calc((100vw - 1144px) / 2));
+  font: 10px var(--mono);
+  color: #c5c4ce;
+}
+.section-shell {
+  max-width: 1220px;
+  margin: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.intro {
+  min-height: 510px;
+  padding-top: 110px;
+  padding-bottom: 100px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+}
+.section-label {
+  color: #8d91a5;
+  padding-top: 8px;
+}
+.intro-copy {
+  max-width: 760px;
+}
+.intro h2,
+.about h2 {
+  font: 500 clamp(34px, 4.5vw, 56px)/1.12 var(--display);
+  letter-spacing: -0.045em;
+  margin: 0 0 28px;
+}
+.intro h2 em {
+  font-style: normal;
+  color: var(--violet);
+}
+.intro-copy > p,
+.about-copy > p:not(.eyebrow) {
+  color: #b5b7c4;
+  max-width: 690px;
+  line-height: 1.85;
+}
+.source-links {
+  display: flex;
+  align-items: center;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  margin-top: 35px;
+  padding-top: 20px;
+  font: 11px var(--mono);
+}
+.source-links span {
+  color: #797f95;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-right: 12px;
+}
+.source-links a {
+  color: #e0e0e8;
+  text-decoration: none;
+}
+.lab-section {
+  background: #e9e8e7;
+  color: var(--ink);
+  padding: 94px 0 105px;
+}
+.lab-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+.lab-heading .section-label {
+  color: #6b7081;
+}
+.lab-heading h2 {
+  font: 600 clamp(38px, 5vw, 56px)/1.1 var(--display);
+  letter-spacing: -0.05em;
+  margin: 10px 0 0;
+}
+.lab-heading > p {
+  font-size: 13px;
+  color: #646879;
+  line-height: 1.7;
+  margin: 0 6px 4px 0;
+}
+.lab-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  border: 1px solid #d4d3d2;
+  background: #f4f3f2;
+  box-shadow: 0 20px 60px #2022381c;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.particle-picker {
+  padding: 20px 24px 24px;
+  border-right: 1px solid #dedddc;
+}
+.particle-picker:nth-child(2) {
+  border-right: 0;
+}
+.picker-label {
+  color: #777d8d;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px;
+  margin: 0 0 12px;
+}
+.picker-label span {
+  color: #a2a5ae;
+}
+.pick-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 10px 9px;
+  margin: 4px 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border 0.2s;
+}
+.pick-button:hover {
+  background: #e9e8ec;
+}
+.pick-button[aria-pressed='true'] {
+  background: #e9e6ff;
+  border-color: #c6bcff;
+}
+.pick-button strong,
+.pick-button small {
+  display: block;
+}
+.pick-button strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+.pick-button small {
+  font-size: 10px;
+  color: #737789;
+  white-space: nowrap;
+}
+/* Hover Effect */
+.hover-trigger {
+  position: relative; /* 0.6.1 */
+  display: inline-block;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    font-size: 20px;
-    height: 400vh;
-    width: 100vw;
-    overflow-x: hidden;
+.hover-image {
+  display: none; /* 0.6.1 */
+  position: absolute; /* 0.6.1 */
+  left: 100%;
+  top: 0;
+  z-index: 10;
 }
 
-#background{
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    filter: brightness(30%);
-}
-
-.projectName, .projectBy{
-    margin:auto;
-    padding-top: 8%;
-    text-align: center;
-    color: lightgrey;
-}
-
-.projectName:hover, .projectBy:hover{
-    animation: lighten 3s forwards linear;
-}
-
-@keyframes lighten {
-    from{
-        color: lightgrey;
-        letter-spacing: normal;
-    }
-    to{
-        color: blue;
-        letter-spacing: 5px;
-    }
-}
-
-.projectName{
-    font-size: 50px;
-}
-
-.navButtons{
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 13em;
-}
-
-.button{
-    background: radial-gradient(#1b1c39, #321414);
-    font-size: 26px;
-    padding: 0.2em;
-    border-radius: 1em;
-    animation: shrink 1s forwards ease-out;
-}
-
-.button > a{
-    text-decoration: none;
-}
-
-a:visited, a:link{
-    color: lightgrey;
-}
-
-.button:hover{
-    animation: enlarge 1s forwards ease-out;
-}
-
-@keyframes enlarge{
-    from{
-        font-size: 26px;
-        border-radius: 1em;
-    }
-    to{
-        font-size: 30px;
-        border-radius: 0.2em;
-    }
-}
-
-@keyframes shrink {
-    to{
-        font-size: 26px;
-        border-radius: 1em;
-    }
-    from{
-        font-size: 30px;
-        border-radius: 0.2em;
-    }
-}
-
-.noMargin{
-    margin: 0;
-}
-
-.wrapper{
-    height: 100vh;
-}
-
-#aboutProject{
-    background-color: #1b1c39;
-}
-
-#smasher{
-    background-color: lightgrey;
-}
-
-#aboutMe{
-    background-color: #1b1c39;
-}
-
-.content{
-    display: flex;
-    text-align: left;
-    height: 80vh;
-    color: white;
-
-}
-
-.text{
-    width: 60%;
-    padding: 0 50px;
-    overflow: scroll;
-    overflow-x: hidden;
-}
-
-.text > p{
-    color: lightgrey;
-}
-
-.picture{
-    width: 40%;
-    padding: 0 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.picture > img{
-    width: 100%;
-}
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background:lightgrey ; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background:#1b1c49 ;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: black; 
-  }
-
-.scrollbarLeft{
-    direction:rtl; 
-}
-
-.scrollbarLeft>h4, .scrollbarLeft>p{
-    direction: ltr;
-}
-
-header{
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    color: white;
-}
-
-.space{
-    height: 90vh;
-    width: 100vw;
-    position: relative;
-}
-
-.smasher{
-    position: relative;
-    margin: 0;
-}
-
-.aboutP{
-    position: absolute;
-    left: 10vw;
-}
-
-.aboutM{
-    position: absolute;
-    right: 10vw;
-}
-
-.particleContainer{
-    position: absolute;
-    top: 2em;
-    border: 1px dashed black;
-}
-
-.left{
-    left:2em;
-}
-
-.right{
-    right: 2em;
-}
-
-.particleContainer > button{
-    display: block;
-    width: 100px;
-    height: 90px;
-}
-
-.circle{
-    margin: auto;
-    height: 80%;
-    width: 80%;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.proton > .circle , .positron > .circle {
-    background: radial-gradient(blue,darkblue);
-    color: white;
+.hover-trigger:hover .hover-image {
+  display: block; /* 0.6.1 */
 }
 
 
-.electron > .circle , .antiProton > .circle{
-    background: radial-gradient(red,darkred);
-    color: white;
+.particle-dot,
+.particle-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--display);
+  font-weight: 600;
 }
-
-#collidingStatus{
-    margin: 0 auto;
-    text-align: center;
-    background:radial-gradient(white,lightgrey);
-    font-weight: 800;
+.particle-dot {
+  width: 35px;
+  height: 35px;
+  font-size: 14px;
 }
-
-#particleLeft , #particleRight, #neutron{
-    position: absolute;
-    width: 80px;
-    aspect-ratio: 1;
-    top: 10em;
+.particle-dot.proton,
+.particle-dot.positron,
+.particle-marker.proton,
+.particle-marker.positron {
+  background: #485bce;
+  color: white;
 }
-
-#neutron{
-    background:radial-gradient(white,grey);
-    color: black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.particle-dot.electron,
+.particle-dot.antiproton,
+.particle-marker.electron,
+.particle-marker.antiproton {
+  background: #d15467;
+  color: white;
+}
+.selected-mark {
+  color: #4940aa;
+  opacity: 0;
+}
+.pick-button[aria-pressed='true'] .selected-mark {
+  opacity: 1;
+}
+.collision-stage {
+  --marker-inset: 12%;
+  --marker-center-offset: 30px;
+  grid-column: 1/-1;
+  position: relative;
+  overflow: hidden;
+  height: 710px;
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    #242943 0,
+    #191d32 38%,
+    #111522 78%
+  );
+  color: white;
+  isolation: isolate;
+}
+.collision-stage:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 0 8%,
+      rgba(116, 227, 221, 0.035) 8.2% 8.4%,
+      transparent 8.6% 20%,
+      rgba(159, 140, 255, 0.04) 20.2% 20.4%,
+      transparent 20.6% 35%,
+      rgba(255, 255, 255, 0.025) 35.2% 35.35%,
+      transparent 35.6%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 49.9%,
+      rgba(255, 255, 255, 0.045) 50%,
+      transparent 50.1%
+    );
+}
+.stage-topline {
+  position: absolute;
+  left: 28px;
+  top: 23px;
+  color: #9196ad;
+  font-size: 9px;
+}
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--cyan);
+  border-radius: 50%;
+  margin-left: 8px;
+  box-shadow: 0 0 9px var(--cyan);
+}
+.status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 25px;
+  text-align: center;
+  font: 10px var(--mono);
+  color: #b8bbca;
+  letter-spacing: 0.06em;
+}
+.beam-line {
+  position: absolute;
+  top: 48%;
+  left: var(--marker-inset);
+  right: var(--marker-inset);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #565c7a 19%,
+    #727894 38%,
+    #b5afd9 50%,
+    #727894 62%,
+    #565c7a 81%,
+    transparent
+  );
+  box-shadow: 0 0 16px #9f8cff44;
+}
+.beam-line:before,
+.beam-line:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 21%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan));
+  opacity: 0.55;
+}
+.beam-line:before {
+  left: 0;
+}
+.beam-line:after {
+  right: 0;
+  transform: rotate(180deg);
+}
+.particle-marker {
+  position: absolute;
+  z-index: 2;
+  top: calc(48% - 30px);
+  width: 60px;
+  height: 60px;
+  background: #32374e;
+  border: 1px solid #777c9a;
+  color: #d7d9e4;
+  left: var(--marker-inset);
+  font-size: 23px;
+  box-shadow: 0 0 30px #aaa8ff28;
+  transition:
+    opacity 0.6s,
+    transform 0.6s;
+}
+.particle-marker#particleRight {
+  left: auto;
+  right: var(--marker-inset);
+}
+.particle-marker:after {
+  content: '';
+  position: absolute;
+  width: 130px;
+  height: 1px;
+  right: 82%;
+  top: 50%;
+  background: linear-gradient(90deg, transparent, currentColor);
+  opacity: 0.45;
+}
+.particle-marker#particleRight:after {
+  right: auto;
+  left: 82%;
+  transform: rotate(180deg);
+}
+.impact {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.impact span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  transform: translate(-50%, -50%);
+}
+.impact span:nth-child(2) {
+  width: 80px;
+  height: 80px;
+  border-color: #9f8cff;
+}
+.impact span:nth-child(3) {
+  width: 140px;
+  height: 140px;
+  border-color: #f7c879;
+}
+.has-result .impact {
+  animation: impactPulse 1s ease-out forwards;
+}
+@keyframes impactPulse {
+  0% {
     opacity: 0;
+    transform: scale(0.2);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(1.9);
+  }
 }
-
-
-#photonOne, #photonTwo, #wPlus, #wMinus, #neutrino{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.has-result .particle-marker#particleLeft {
+  animation: inboundLeft 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
+}
+.has-result .particle-marker#particleRight {
+  animation: inboundRight 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
+}
+@keyframes inboundLeft {
+  0% {
+    left: var(--marker-inset);
+    transform: scale(1);
+  }
+  72% {
+    left: calc(50% - 30px);
+    transform: scale(0.78);
+  }
+  100% {
+    left: calc(50% - 30px);
+    transform: scale(0.78);
+  }
+}
+@keyframes inboundRight {
+  0% {
+    right: var(--marker-inset);
+    transform: scale(1);
+  }
+  72% {
+    right: calc(50% - 30px);
+    transform: scale(0.78);
+  }
+  100% {
+    right: calc(50% - 30px);
+    transform: scale(0.78);
+  }
+}
+.is-photons .particle-marker,
+.is-pions .particle-marker,
+.is-hadrons .particle-marker,
+.is-muons .particle-marker,
+.is-shower .particle-marker {
+  animation:
+    inboundLeft 0.9s forwards,
+    vanish 0.35s 0.75s forwards;
+}
+@keyframes vanish {
+  to {
     opacity: 0;
-    width: 40px;
-    aspect-ratio: 1;
-    top: 10.5em;
-    left: 40%;
-    border-radius: 50%;
-    background-color: yellow;
+    transform: scale(0.1);
+  }
 }
-
-#photonTwo{
-    left: 60%;
+.outgoing {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  opacity: 0;
+  font: bold 18px var(--display);
+  color: #111;
+  background: #f6d889;
+  box-shadow: 0 0 24px #f6d88966;
 }
-
-#neutrino{
-    background:radial-gradient(white,green);
-    color: black !important;
+.pion-a,
+.pion-b {
+  background: #9f8cff;
+  color: white;
+  box-shadow: 0 0 20px #9f8cff77;
 }
-
-.interaction{
-    animation: interaction 0.4s forwards linear;
+.neutron-product {
+  background: #e4e6ed;
+  color: #171a2b;
 }
-
-@keyframes interaction {
-    0%{
-        opacity: 1;
-        left: 40%;
-    }
-    99%{
-        left: 58%;
-    }
-    100%{
-        opacity: 0;
-    }
-    
+.neutrino-product {
+  background: #74e3dd;
+  color: #111;
+  font-size: 10px;
 }
-
-#particleLeft{
-    left: 8em;
+.is-photons .photon-a,
+.is-photons .photon-b {
+  animation: productA 1.3s 0.75s ease-out forwards;
 }
-
-#particleRight{
-    right: 8em;
+.is-pions .pion-a,
+.is-hadrons .pion-a {
+  animation: productA 1.2s 0.75s ease-out forwards;
 }
-
-.smasherButtons{
-    position: absolute;
-    display: flex;
-    justify-content:space-evenly;
-    align-items:center;
-    top: 3em;
-    width: 100vw;
+.is-pions .pion-b,
+.is-hadrons .pion-b {
+  animation: productB 1.2s 0.75s ease-out forwards;
 }
-
-.collide, .reset{
-    height: 30px;
-    border: 1px dashed black;
-    width: 150px;
-    letter-spacing: 1px;
-    border-radius: 3px
+.is-weak .neutron-product {
+  animation: productA 1s 0.75s ease-out forwards;
 }
-
-.moveToRight{
-    animation: moveRight 1s forwards ease-in;
+.is-weak .neutrino-product {
+  animation: productB 1s 0.75s ease-out forwards;
 }
-
-@keyframes moveRight {
-    0%{
-        left: 8em;
-        width: 80px;
-        opacity: 1;
-    }
-    80%{
-        opacity: 0;
-    }
-    100%{
-        left: 48%;
-        width: 40px;
-        opacity: 0;
-    }
+.is-muons .pion-a,
+.is-muons .pion-b {
+  background: #74e3dd;
+  color: #101322;
 }
-
-.moveToLeft{
-    animation: moveLeft 1s forwards ease-in;
+.is-muons .pion-a {
+  animation: productA 1.1s 0.75s ease-out forwards;
 }
-
-@keyframes moveLeft {
-    0%{
-        right: 8em;
-        width: 80px;
-        opacity: 1;
-    }
-    80%{
-        opacity: 0;
-    }
-    to{
-        right: 48%;
-        width: 40px;
-        opacity: 0;
-    }
+.is-muons .pion-b {
+  animation: productB 1.1s 0.75s ease-out forwards;
 }
-
-#explosion{
-    position: absolute;
-    mix-blend-mode:color-burn;
-    width: 200px;
-    left: 44%;
-    top: 6em;
+.is-shower .pion-a,
+.is-shower .pion-b {
+  animation: productA 1.2s 0.75s ease-out forwards;
+}
+.is-shower .neutron-product,
+.is-shower .neutrino-product {
+  animation: productB 1.2s 0.85s ease-out forwards;
+}
+@keyframes productA {
+  to {
+    opacity: 1;
+    transform: translate(-170px, -95px);
+  }
+}
+@keyframes productB {
+  to {
+    opacity: 1;
+    transform: translate(170px, 95px);
+  }
+}
+.orbit-product {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.orbit-ring {
+  position: absolute;
+  top: -32px;
+  left: -50px;
+  width: 100px;
+  height: 64px;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  transform: rotate(-35deg);
+}
+.orbit-ring:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 45px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f7c879;
+  box-shadow: 0 0 15px #f7c879;
+}
+.atom-label {
+  position: absolute;
+  left: -18px;
+  top: -22px;
+  color: white;
+  font: 600 30px var(--display);
+}
+.is-atom .orbit-product {
+  animation: atomForm 0.7s 0.85s ease-out forwards;
+}
+@keyframes atomForm {
+  to {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+.exchange-label {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  font: 12px var(--mono);
+  color: var(--violet);
+  opacity: 0;
+}
+.exchange-label small {
+  display: block;
+  color: #a5a8b8;
+  font: 9px var(--mono);
+  white-space: nowrap;
+}
+.is-weak .exchange-label {
+  animation: exchangeFlash 1.5s 0.5s ease-in-out forwards;
+}
+@keyframes exchangeFlash {
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
     opacity: 0;
+  }
 }
-
-
-.info{
-    position: absolute;
-    height: 35%;
-    width: 100%;
-    top: 65%;
+.energy-panel {
+  position: absolute;
+  left: 28px;
+  bottom: 32px;
+  width: 350px;
+}
+.energy-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font: 9px var(--mono);
+  letter-spacing: 0.12em;
+  color: #9da2b6;
+}
+.energy-label output {
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+.energy-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #5b607b;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.energy-options button {
+  background: #191d30;
+  border: 0;
+  border-right: 1px solid #5b607b;
+  color: #aeb2c2;
+  padding: 11px 10px;
+  font: 10px var(--mono);
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+.energy-options button:last-child {
+  border-right: 0;
+}
+.energy-options button:hover {
+  background: #282d47;
+  color: white;
+}
+.energy-options button[aria-pressed='true'] {
+  background: #363452;
+  color: #c1b7ff;
+  box-shadow: inset 0 -2px var(--violet);
+}
+.stage-controls {
+  position: absolute;
+  right: 28px;
+  bottom: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.collide-button,
+.reset-button {
+  cursor: pointer;
+  border: 0;
+  font: 11px var(--mono);
+  letter-spacing: 0.1em;
+}
+.collide-button {
+  background: var(--cyan);
+  color: #101822;
+  padding: 14px 20px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.collide-button span {
+  font-size: 16px;
+  margin-left: 14px;
+}
+.collide-button:hover {
+  background: #a4f6ef;
+}
+.collide-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.reset-button {
+  background: transparent;
+  color: #c3c5d1;
+  padding: 10px;
+}
+.reset-button:hover {
+  color: white;
+}
+.result-card {
+  position: absolute;
+  z-index: 5;
+  right: 30px;
+  top: 100px;
+  width: min(390px, 40%);
+  max-height: calc(100% - 250px);
+  overflow: auto;
+  padding: 22px 24px;
+  background: #101322ed;
+  border: 1px solid #555b78;
+  border-radius: 4px;
+  box-shadow: 0 8px 40px #090a14bb;
+  backdrop-filter: blur(12px);
+}
+.result-card[hidden] {
+  display: none;
+}
+.result-kicker {
+  font-size: 8px;
+  margin: 0 25px 6px 0;
+  color: var(--cyan);
+}
+.result-card h3 {
+  font: 500 19px/1.3 var(--display);
+  margin: 0 24px 8px 0;
+}
+.result-card p:last-child {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c2c4d0;
+  margin: 0;
+}
+.equation {
+  font: 12px var(--mono);
+  color: var(--cyan);
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+.close-result {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #565b74;
+  border-radius: 50%;
+  background: #20243a;
+  color: #fff;
+  font: 24px/1 var(--body);
+  cursor: pointer;
+}
+.close-result:hover {
+  background: #393e5b;
+  color: var(--cyan);
+}
+.stage-footnote {
+  position: absolute;
+  bottom: 9px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font: 8px var(--mono);
+  color: #82879e;
+}
+.lab-note {
+  font-size: 12px;
+  color: #686c79;
+  max-width: 920px;
+  margin: 20px auto 0;
+  line-height: 1.8;
+}
+.lab-note strong {
+  color: #313545;
+}
+.about {
+  padding-top: 110px;
+  padding-bottom: 110px;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 0.8fr;
+  gap: 28px;
+  align-items: start;
+  min-height: 480px;
+}
+.about h2 {
+  margin: 10px 0 25px;
+}
+.about-copy {
+  max-width: 540px;
+}
+.about-copy > p:not(.eyebrow) {
+  font-size: 14px;
+}
+.back-top {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--cyan);
+  font: 11px var(--mono);
+  text-decoration: none;
+}
+.about-orbit {
+  width: 210px;
+  height: 210px;
+  position: relative;
+  border: 1px solid #464960;
+  border-radius: 50%;
+  justify-self: end;
+  margin: 65px 20px 0 0;
+}
+.about-orbit:before,
+.about-orbit:after {
+  content: '';
+  position: absolute;
+  inset: 25px -20px;
+  border: 1px solid #464960;
+  border-radius: 50%;
+  transform: rotate(55deg);
+}
+.about-orbit:after {
+  transform: rotate(-55deg);
+}
+.about-orbit span,
+.about-orbit b {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font: 13px var(--display);
+  font-style: normal;
+}
+.about-orbit span {
+  background: #485bce;
+  top: 14px;
+  left: 70px;
+}
+.about-orbit b {
+  background: #d15467;
+  right: 14px;
+  bottom: 43px;
+}
+.about-orbit i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--cyan);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 0 14px var(--cyan);
+}
+footer {
+  border-top: 1px solid var(--line);
+  max-width: 1080px;
+  margin: auto;
+  padding: 22px 0 30px;
+  display: flex;
+  justify-content: space-between;
+  color: #85899b;
+  font: 9px var(--mono);
+  letter-spacing: 0.1em;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+@media (max-width: 800px) {
+  .top-nav {
+    height: 68px;
+    padding: 0 22px;
+  }
+  .top-nav > div {
+    gap: 14px;
+  }
+  .top-nav > div a {
+    font-size: 11px;
+  }
+  .brand {
+    font-size: 10px !important;
+  }
+  .hero-art {
+    background-position: 58% center;
+    opacity: 0.55;
+  }
+  .hero-copy {
+    padding: 150px 25px 0;
+  }
+  .hero h1 {
+    font-size: 54px;
+  }
+  .hero-credit {
+    right: 24px;
+  }
+  .section-shell {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .intro {
+    padding-top: 75px;
+    padding-bottom: 75px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .intro h2 {
+    font-size: 42px;
+  }
+  .lab-section {
+    padding: 70px 0;
+  }
+  .lab-heading {
+    align-items: start;
+    gap: 20px;
+    flex-direction: column;
+  }
+  .lab-heading > p br {
+    display: none;
+  }
+  .particle-picker {
+    padding: 15px 14px;
+  }
+  .pick-button {
+    grid-template-columns: 36px minmax(0, 1fr) 14px;
+    gap: 7px;
+    padding: 8px 4px;
+  }
+  .pick-button small {
+    white-space: normal;
+    font-size: 9px;
+  }
+  .collision-stage {
+    height: 650px;
+  }
+  .particle-marker {
+    width: 52px;
+    height: 52px;
+  }
+  .result-card {
+    right: 18px;
+    top: 92px;
+    width: min(370px, 48%);
+  }
+  .energy-panel {
+    left: 18px;
+    width: 320px;
+  }
+  .stage-controls {
+    right: 18px;
+    bottom: 31px;
+  }
+  .about {
+    padding-top: 75px;
+    padding-bottom: 70px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    min-height: unset;
+  }
+  .about-orbit {
+    display: none;
+  }
+  .about h2 {
+    font-size: 44px;
+  }
+  footer {
+    margin: 0 22px;
+    gap: 15px;
+    line-height: 1.6;
+  }
+}
+@media (max-width: 560px) {
+  .top-nav > div {
+    gap: 9px;
+  }
+  .top-nav > div a {
+    font-size: 10px;
+  }
+  .brand {
+    letter-spacing: 0;
+  }
+  .hero {
+    min-height: 680px;
+  }
+  .hero h1 {
+    font-size: 47px;
+  }
+  .hero-copy {
+    padding-top: 130px;
+  }
+  .lab-panel {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+  }
+  .particle-picker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    border: 0;
+    border-bottom: 1px solid #dedddc;
+  }
+  .particle-picker:nth-child(2) {
+    border-bottom: 1px solid #dedddc;
+  }
+  .picker-label {
+    grid-column: 1/-1;
+    margin-bottom: 5px;
+  }
+  .pick-button {
+    grid-template-columns: 32px minmax(0, 1fr) 12px;
+    padding: 7px 4px;
+  }
+  .pick-button strong {
+    font-size: 11px;
+  }
+  .pick-button small {
+    font-size: 8px;
+    line-height: 1.3;
+  }
+  .collision-stage {
+    height: 690px;
+    --marker-center-offset: 23px;
+  }
+  .status {
+    top: 55px;
+  }
+  .particle-marker {
+    width: 46px;
+    height: 46px;
+    top: calc(43% - 23px);
+  }
+  .particle-marker#particleLeft {
+    left: var(--marker-inset);
+  }
+  .particle-marker#particleRight {
+    right: var(--marker-inset);
+  }
+  .collision-stage {
+    --marker-inset: 6%;
+  }
+  .beam-line {
+    top: 43%;
+    left: 7%;
+    right: 7%;
+  }
+  .impact,
+  .outgoing {
+    top: 43%;
+  }
+  .orbit-product {
+    top: 43%;
+  }
+  .exchange-label {
+    top: 36%;
+  }
+  .energy-panel {
+    left: 14px;
+    right: 14px;
+    bottom: 84px;
+    width: auto;
+  }
+  .energy-label {
+    font-size: 8px;
+  }
+  .stage-controls {
+    left: 14px;
+    right: 14px;
+    bottom: 34px;
+    justify-content: space-between;
+  }
+  .result-card {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: 170px;
+    width: auto;
+    max-height: 44%;
+    padding: 18px 18px;
+  }
+  .stage-footnote {
+    font-size: 7px;
+    bottom: 8px;
+  }
+  .result-card h3 {
+    font-size: 16px;
+  }
+  .result-card p:last-child {
+    font-size: 11px;
+  }
+  .about-orbit {
+    display: none;
+  }
+  footer {
+    font-size: 8px;
+  }
+}
+@media (max-width: 380px) {
+  .top-nav {
+    padding: 0 14px;
+  }
+  .top-nav > div {
+    gap: 7px;
+  }
+  .brand {
+    font-size: 9px !important;
+  }
+  .top-nav > div a {
+    font-size: 9px;
+  }
+  .section-shell {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .collision-stage {
+    height: 710px;
+  }
+  .pick-button {
+    grid-template-columns: 28px minmax(0, 1fr) 10px;
+    gap: 4px;
+  }
+  .particle-dot {
+    width: 27px;
+    height: 27px;
+    font-size: 11px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.appear{
-    animation: fadeIn 1s forwards cubic-bezier(1,-0.02,1,-0.02);
+.particle-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-
-@keyframes fadeIn {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
+.particle-picker .picker-label {
+  grid-column: 1/-1;
 }
-
-.deflectLeftParticle{
-    animation: deflectLeft 1s forwards ease-out;
+.status {
+  top: 58px;
 }
-
-@keyframes deflectLeft{
-    0%{
-        opacity: 0;
-        left: 48%;
-    }
-    20%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-        left: 15em;
-        top: 50%;
-    }
+.collision-stage:not(.has-result) .particle-marker.proton,
+.collision-stage:not(.has-result) .particle-marker.electron,
+.collision-stage:not(.has-result) .particle-marker.antiproton,
+.collision-stage:not(.has-result) .particle-marker.positron {
+  animation: idleDrift 3s ease-in-out infinite;
 }
-
-.deflectRightParticle{
-    animation: deflectRight 1s forwards ease-out;
+@keyframes idleDrift {
+  50% {
+    transform: translateY(-9px) scale(1.04);
+    box-shadow: 0 0 36px #9f8cff66;
+  }
 }
-
-@keyframes deflectRight{
-    from{
-        opacity: 0;
-        left: 48%;
-    }
-    20%{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-        left: 70%;
-        top: 50%;
-    }
+.is-scatter .particle-marker#particleLeft {
+  animation: scatterLeft 1.9s ease-in-out forwards;
 }
-
-.overline{
-    text-decoration: overline;
-    color: white;
+.is-scatter .particle-marker#particleRight {
+  animation: scatterRight 1.9s ease-in-out forwards;
 }
-
-/*diagrams shown after collision*/
-
-.info > img{    
-    position: inherit;
+@keyframes scatterLeft {
+  0% {
+    left: var(--marker-inset);
+    top: calc(48% - var(--marker-center-offset));
+  }
+  55% {
+    left: calc(50% - 30px);
+    top: calc(48% - var(--marker-center-offset));
+    transform: scale(0.75);
+  }
+  100% {
+    left: 28%;
+    top: 29%;
+    transform: scale(0.66);
+  }
+}
+@keyframes scatterRight {
+  0% {
+    right: var(--marker-inset);
+    top: calc(48% - var(--marker-center-offset));
+  }
+  55% {
+    right: calc(50% - 30px);
+    top: calc(48% - var(--marker-center-offset));
+    transform: scale(0.75);
+  }
+  100% {
+    right: 28%;
+    top: 63%;
+    transform: scale(0.66);
+  }
+}
+.products {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.products .outgoing {
+  left: 50%;
+  top: 48%;
+  width: 46px;
+  height: 46px;
+  animation: launchProduct 1.1s 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+.products .photon {
+  background: #f6d889;
+  color: #111;
+  box-shadow: 0 0 28px #f6d88988;
+}
+.products .pion {
+  background: #9f8cff;
+  color: #fff;
+  box-shadow: 0 0 24px #9f8cff88;
+}
+.products .muon {
+  background: #74e3dd;
+  color: #111;
+}
+.products .neutrino {
+  background: #74e3dd;
+  color: #111;
+  font-size: 11px;
+}
+.products .baryon {
+  background: #e4e6ed;
+  color: #171a2b;
+}
+.products .lepton {
+  background: #d15467;
+  color: #fff;
+}
+.products .atom {
+  background: #485bce;
+  color: #fff;
+}
+.products .atom:first-child {
+  display: none;
+}
+@keyframes launchProduct {
+  to {
+    opacity: 1;
+    transform: translate(var(--dx), var(--dy));
+  }
+}
+.is-atom .particle-marker#particleLeft,
+.is-photons .particle-marker#particleLeft,
+.is-pions .particle-marker#particleLeft,
+.is-hadrons .particle-marker#particleLeft,
+.is-muons .particle-marker#particleLeft,
+.is-production .particle-marker#particleLeft,
+.is-weak .particle-marker#particleLeft {
+  animation:
+    inboundLeft 0.9s ease forwards,
+    vanish 0.25s 0.75s forwards;
+}
+.is-atom .particle-marker#particleRight,
+.is-photons .particle-marker#particleRight,
+.is-pions .particle-marker#particleRight,
+.is-hadrons .particle-marker#particleRight,
+.is-muons .particle-marker#particleRight,
+.is-production .particle-marker#particleRight,
+.is-weak .particle-marker#particleRight {
+  animation:
+    inboundRight 0.9s ease forwards,
+    vanish 0.25s 0.75s forwards;
+}
+@media (max-width: 560px) {
+  .particle-picker {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .particle-marker {
+    top: calc(48% - 23px);
+  }
+  .beam-line,
+  .impact,
+  .products .outgoing,
+  .orbit-product {
+    top: 48%;
+  }
+}
+.beam-particle {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 16px 4px #74e3dd88;
+  opacity: 0;
+}
+.beam-b {
+  left: auto;
+  right: 0;
+  background: #c3b8ff;
+  box-shadow: 0 0 16px 4px #9f8cff88;
+}
+.is-running .beam-particle {
+  opacity: 1;
+  animation: beamCross 1.1s cubic-bezier(0.45, 0, 0.3, 1) both;
+}
+.is-running .beam-b {
+  animation-name: beamCrossBack;
+}
+@keyframes beamCross {
+  0% {
+    left: 0;
     opacity: 0;
-    pointer-events:none;
+  }
+  12% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(50% - 4px);
+    opacity: 0;
+  }
 }
-
-#protonPositron, #electronElectron, #electronAntiProton, #antiProtonAntiProton, #positronPositron{
-    width: 300px ;
-    aspect-ratio: initial;
+@keyframes beamCrossBack {
+  0% {
+    right: 0;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    right: calc(50% - 4px);
+    opacity: 0;
+  }
 }
-
-.particleContainer>button:hover, .reset:hover, .collide:hover{
-    transition: linear 0.35s;
-    background-color: rgb(184, 184, 184);
+.is-running .beam-line {
+  animation: beamSurge 1.2s ease-out both;
 }
-
+@keyframes beamSurge {
+  30% {
+    filter: brightness(2.2);
+    box-shadow: 0 0 30px #9f8cffaa;
+  }
+  100% {
+    filter: brightness(1);
+    box-shadow: 0 0 16px #9f8cff44;
+  }
+}
+.result-card:not([hidden]) {
+  animation: resultArrive 0.3s ease-out both;
+}
+@keyframes resultArrive {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
