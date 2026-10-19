@@ -388,9 +388,11 @@ function collide() {
     : 'W− <small>virtual exchange</small>';
   if (type === 'scatter') productsLayer.replaceChildren();
   else animateProducts(products);
-  result.innerHTML = `<button id="closeResult" class="close-result" aria-label="Close collision result">×</button><p class="result-kicker">${energyLevel.toUpperCase()} ENERGY · ${energy} CM KINETIC</p><h3>${title}</h3><p class="equation">${equation}</p><p>${description}</p>`;
-  result.hidden = false;
-  result.querySelector('#closeResult').addEventListener('click', closeResult);
+  setTimeout(() => {
+    result.innerHTML = `<button id="closeResult" class="close-result" aria-label="Close collision result">×</button><p class="result-kicker">${energyLevel.toUpperCase()} ENERGY · ${energy} CM KINETIC</p><h3>${title}</h3><p class="equation">${equation}</p><p>${description}</p>`;
+    result.hidden = false;
+    result.querySelector('#closeResult').addEventListener('click', closeResult);
+  }, 2000);
   collideButton.disabled = true;
 }
 
